@@ -8,25 +8,25 @@ module.exports = function(app, passport, db) {
   });
 
   // PROFILE SECTION =========================
+  //what if there is no profile???
   app.get('/profile', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
+    db.collection('profile').findOne({user: req.user}, (err, result) => {
       if (err) return console.log(err)
       res.render('profile.ejs', {
-        user: req.user,
-        messages: result
+        profile: result
       })
     })
   });
 
+//WHAT IF THE USER ALRRADY HAS A PROFILE??
   app.get('/create', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
-      if (err) return console.log(err)
+    // db.collection('messages').find().toArray((err, result) => {
+    //   if (err) return console.log(err)
       res.render('createProfile.ejs', {
         user: req.user,
-        messages: result
+        // messages: result
       })
-    })
-  });
+    });
 
   app.get('/expensePage', isLoggedIn, function(req, res) {
     db.collection('messages').find().toArray((err, result) => {
@@ -90,15 +90,16 @@ module.exports = function(app, passport, db) {
   })
 
 
-  app.post('/createProfile', (req, res) => {
+  app.post('/createProfile', isLoggedIn, (req, res) => {
     let firstName = req.body.firstName
-    let lastName = req.body.firstName
+    let lastName = req.body.lastName
     let currentEmployed = req.body.currentEmployed
     let city = req.body.city
     let state = req.body.state
     let aboutMe = req.body.aboutMe
 
     db.collection('profile').save({
+      user: req.user,
       firstName: firstName,
       lastName: lastName,
       currentEmployed: currentEmployed,

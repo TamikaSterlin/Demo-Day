@@ -6,68 +6,62 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="font-awesome.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="main.css">
 </head>
 
-<body>
+<body class="is-preload">
+  <div class="id="page-wrapper"">
+
+
+  <header id="header">
+    <nav id="nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="#" class="icon solid fa-angle-down">Menu</a>
+          <ul>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/expensePage">Expenses</a></li>
+            <li><a href="elements.html">Live Chat</a></li>
+          </ul>
+        </li>
+        <li><a href="/logout" class="button">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
   <div class="container">
 
     <div class="page-header text-center">
-      <h1><i class="fas fa-door-open"></i></span>Welcome Back</h1>
-      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+      <h1 class="welcome"><i class="fas fa-door-open"></i></span>Welcome</h1>
     </div>
 
     <div class="row">
-
-      <!-- LOCAL INFORMATION -->
-      <!-- <div class="col-sm-6">
-        <div class="well">
-          <h3><span class="fa fa-user"></span> Local</h3>
-
-
-          <% if (user.local.email) { %>
-          <p>
-            <strong>id</strong>: <%= user._id %><br>
-            <strong>email</strong>: <%= user.local.email %><br>
-            <strong>password</strong>: <%= user.local.password %>
-          </p>
-
-          <a href="/unlink/local" class="btn btn-default">Unlink</a>
-          <% } else { %>
-          <a href="/connect/local" class="btn btn-default">Connect Local</a>
-          <% } %>
-
-        </div>
-      </div> -->
-      <div class="col-sm-6">
-        <h3>Messages</h3>
-        <ul class="messages">
-          <% for(var i=0; i<messages.length; i++) {%>
-          <li class="message">
-            <img src="..." class="img-thumbnail" alt="...">
-            <span><%= messages[i].name %></span>
-            <span><%= messages[i].msg %></span>
-            <span><%= messages[i].thumbUp %></span>
-            <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-            <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-            <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-          </li>
-          <% } %>
-        </ul>
-
-        <h2>Add a message</h2>
-        <% if (user.local.email) { %>
-        <form action="/messages" method="POST">
-          <input type="text" value="<%= user.local.email %>" name="name">
-          <input type="text" placeholder="message" name="msg">
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <% } %>
-
+  <section class="parent">
+    <P>PROFILE INFO</P>
+      <img src="" alt="">
+      <h3>First name: <span><%= profile.firstName %> </span>  Last name: <span><%= profile.lastName %> </span></h3>
+      <h3>City: <span><%= profile.city %> </span> State: <span><%= profile.state %> </span> </h3>
+      <h3>Currently Employed: <span><%= profile.currentEmployed %></span> </h3>
+      <h3>About Me:<span><%= profile.aboutMe %> </span> </h3>
+  </section>
+  <section class="parent">
+      <P>LAST FEW EXPENSES</P>
+      <img src="" alt="">
+      <h3>First name: <span><%= profile.firstName %> </span>  Last name: <span><%= profile.lastName %> </span></h3>
+      <h3>City: <span><%= profile.city %> </span> State: <span><%= profile.state %> </span> </h3>
+      <h3>Currently Employed: <span><%= profile.currentEmployed %></span> </h3>
+      <h3>About Me:<span><%= profile.aboutMe %> </span> </h3>
+  </section>
     </div>
-    
 
+
+
+    <script src="jquery.min.js"></script>
+    <script src="jquery.dropotron.min.js"></script>
+    <script src="jquery.scrollex.min.js"></script>
+    <script src="browser.min.js"></script>
+    <script src="breakpoints.min.js"></script>
+    <script src="util.js"></script>
     <script src="main.js"></script>
 
 </body>
