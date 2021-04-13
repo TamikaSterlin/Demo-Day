@@ -37,8 +37,8 @@
 		</header>
 
 		<!-- Main -->
-		<section id="main" class="container medium">
-			<header>
+		<!-- <section id="main" class="container medium"> -->
+			<!-- <header>
 				<h2>Track Expenses</h2>
 			</header>
 			<div class="box">
@@ -47,6 +47,7 @@
 						<% let date = new Date()
 						let month = date.getMonth() + 1
 						let day = date.getDate()
+						let lastDay = date.getDate() + 7
 						let year = date.getFullYear()
 						%>
 						<input type="date" id="start" name="currentDate" value="<%= year %>-<%= month %>-<%= day %>" min="<%= year %>-<%= month %>-01" max="<%= year %>-<%= month %>-31">
@@ -76,23 +77,19 @@
 				</section>
 			</div>
 
-		</section>
+		</section> -->
 
 		<section id="main" class="container medium">
-			<h2>Last Few Expenses ...</h2>
-			<div class="box">
+			<h2>Expense Report</h2>
+			<div class="listBox">
 				<%
 				let total = 0
-				let stop = 0
-				if(expenses.length > 3){
-					stop = expenses.length - 3
-				}
-				for(var i=expenses.length - 1; i >= stop; i--) {%>
+				for(var i=0 ; i < expenses.length; i++) {%>
 				<div class="expenseBox">
-				<p>Date: <span class="item"><%= expenses[i].currentDate %></span></p>
-				<p>category: <span class="item"><%= expenses[i].category %></span></p>
-				<p>Expense Amount: <span class="item"><%= expenses[i].amount %></span></p>
-				<p>Description: <span class="item"><%= expenses[i].description %></span></p>
+				<p>Date: <span><%= expenses[i].currentDate %></span></p>
+				<p>category: <span id="category"><%= expenses[i].category %></span></p>
+				<p>Expense Amount: <span><%= expenses[i].amount %></span></p>
+				<p>Description: <span><%= expenses[i].description %></span></p>
 				<p><span><i class="fa fa-trash" aria-hidden="true"></i></span></p>
 				</div>
 				<% } %>

@@ -1,4 +1,5 @@
 module.exports = function(app, passport, db) {
+const fetch = require('node-fetch')
 
   // normal routes ===============================================================
 
@@ -10,7 +11,10 @@ module.exports = function(app, passport, db) {
   // PROFILE SECTION =========================
   //what if there is no profile???
   app.get('/profile', isLoggedIn, function(req, res) {
-    db.collection('profile').findOne({user: req.user}, (err, result) => {
+    db.collection('profile').findOne({
+      user: req.user.local.email
+    }, (err, result) => {
+      console.log(result);
       if (err) return console.log(err)
       res.render('profile.ejs', {
         profile: result
@@ -18,22 +22,42 @@ module.exports = function(app, passport, db) {
     })
   });
 
-//WHAT IF THE USER ALRRADY HAS A PROFILE??
+  //WHAT IF THE USER ALRRADY HAS A PROFILE??
   app.get('/create', isLoggedIn, function(req, res) {
     // db.collection('messages').find().toArray((err, result) => {
     //   if (err) return console.log(err)
-      res.render('createProfile.ejs', {
-        user: req.user,
-        // messages: result
-      })
-    });
+    res.render('createProfile.ejs', {
+      user: req.user.local.email,
+      // messages: result
+    })
+  });
 
   app.get('/expensePage', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
+    //find method ensures that its only showing that specific users info and sorts by current date
+    db.collection('expenses').find({
+      user: req.user.local.email
+    }).sort({
+      currentDate: 1
+    }).toArray((err, result) => {
       if (err) return console.log(err)
       res.render('expenses.ejs', {
         user: req.user,
-        messages: result
+        expenses: result
+      })
+    })
+  });
+
+  app.get('/expenseReport', isLoggedIn, function(req, res) {
+    //find method ensures that its only showing that specific users info and sorts by current date
+    db.collection('expenses').find({
+      user: req.user.local.email
+    }).sort({
+      currentDate: 1
+    }).toArray((err, result) => {
+      if (err) return console.log(err)
+      res.render('expenseReport.ejs', {
+        user: req.user,
+        expenses: result
       })
     })
   });
@@ -42,27 +66,25 @@ module.exports = function(app, passport, db) {
     db.collection('messages').find().toArray((err, result) => {
       if (err) return console.log(err)
       res.render('livechat.ejs', {
-        user: req.user,
+        user: req.user.local.email,
         messages: result
       })
     })
   });
 
   app.get('/diningPage', isLoggedIn, function(req, res) {
-    db.collection('messages').find().toArray((err, result) => {
-      if (err) return console.log(err)
       res.render('dining.ejs', {
+        restaurants: null,
+        zip: null,
         user: req.user,
-        messages: result
       })
-    })
-  });
+    });
 
   app.get('/jobPage', isLoggedIn, function(req, res) {
     db.collection('messages').find().toArray((err, result) => {
       if (err) return console.log(err)
       res.render('jobs.ejs', {
-        user: req.user,
+        user: req.user.local.email,
         messages: result
       })
     })
@@ -76,36 +98,16 @@ module.exports = function(app, passport, db) {
 
   // message board routes ===============================================================
 
-  app.post('/messages', (req, res) => {
-    db.collection('messages').save({
-      name: req.body.name,
-      msg: req.body.msg,
-      thumbUp: 0,
-      thumbDown: 0
-    }, (err, result) => {
-      if (err) return console.log(err)
-      console.log('saved to database')
-      res.redirect('/profile')
-    })
-  })
-
 
   app.post('/createProfile', isLoggedIn, (req, res) => {
-    let firstName = req.body.firstName
-    let lastName = req.body.lastName
-    let currentEmployed = req.body.currentEmployed
-    let city = req.body.city
-    let state = req.body.state
-    let aboutMe = req.body.aboutMe
-
     db.collection('profile').save({
-      user: req.user,
-      firstName: firstName,
-      lastName: lastName,
-      currentEmployed: currentEmployed,
-      city: city,
-      state: state,
-      aboutMe: aboutMe
+      user: req.user.local.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      currentEmployed: req.body.currentEmployed,
+      city: req.body.city,
+      state: req.body.state,
+      aboutMe: req.body.aboutMe
     }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
@@ -114,17 +116,59 @@ module.exports = function(app, passport, db) {
   })
 
   app.post('/expensePage', (req, res) => {
+    const date = new Date(Date.parse(req.body.currentDate + ' ' + req.body.time + ' GMT'))
+    console.log(date);
     db.collection('expenses').save({
-      name: req.body.name,
-      msg: req.body.msg,
-      thumbUp: 0,
-      thumbDown: 0
+      user: req.user.local.email,
+      currentDate: date,
+      category: req.body.category,
+      amount: req.body.amount,
+      description: req.body.description
     }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
-      res.redirect('/profile')
+      res.redirect('/expensePage')
     })
   })
+
+  app.post('/expenseReport', (req, res) => {
+    const date = new Date(Date.parse(req.body.currentDate + ' ' + req.body.time + ' GMT'))
+    console.log(date);
+    db.collection('expenses').save({
+      user: req.user.local.email,
+      currentDate: date,
+      category: req.body.category,
+      amount: req.body.amount,
+      description: req.body.description
+    }, (err, result) => {
+      if (err) return console.log(err)
+      console.log('saved to database')
+      res.redirect('/expenseReport')
+    })
+  })
+
+  app.post('/diningPage', (req, res) => {
+    const zip = req.body.Zipcode
+    const url = `https://api.documenu.com/v2/restaurants/zip_code/${zip}?key=d2742dcef78e36acc44f109a098f3fb3&page=1`
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.data);
+        let restaurants = data.data
+        res.render('dining.ejs', {
+          user: req.user,
+          zip: zip,
+          restaurants: restaurants
+        })
+        console.log(zip);
+      }, (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/expensePage')
+      })
+  })
+
+
 
 
   app.put('/messages', (req, res) => {
@@ -167,11 +211,11 @@ module.exports = function(app, passport, db) {
       })
   })
 
-  app.delete('/messages', (req, res) => {
-    db.collection('messages').findOneAndDelete({
-      name: req.body.name,
-      msg: req.body.msg
+  app.delete('/deleteExpense', (req, res) => {
+    db.collection('expenses').findOneAndDelete({
+      user: req.user.local.email
     }, (err, result) => {
+      console.log(result);
       if (err) return res.send(500, err)
       res.send('Message deleted!')
     })

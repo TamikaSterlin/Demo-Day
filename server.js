@@ -16,6 +16,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
+var fetch = require('node-fetch');
 
 var db
 
