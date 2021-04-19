@@ -1,16 +1,18 @@
 <!doctype html>
 <html>
 <head>
-    <title>21 Savage Fan Site</title>
+    <title>Travel Buddy</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 </head>
-<body>
-<div class="container">
-<div class="col-sm-6 col-sm-offset-3">
+<body id="signup">
+<div class="container" id="signupForm">
+<div class="col-sm-6 col-sm-offset-3" >
 
-    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+    <h1 class="signupTitle"><span class="fa fa-sign-in"></span> Signup</h1>
 
     <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
@@ -27,13 +29,13 @@
             <input type="password" class="form-control" name="password">
         </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        <button id="loginButton" type="submit" class="btn btn-warning btn-lg">Signup</button>
     </form>
 
     <hr>
 
-    <p>Already have an account? <a href="/login">Login</a></p>
-    <p>Or go <a href="/">home</a>.</p>
+    <p class="linkTitle">Already have an account? <a href="/login"><span class="links">Login</span></a></p>
+    <p class="linkTitle">Or go <a href="/"><span class="links">home</span></a>.</p>
 
 </div>
 </div>

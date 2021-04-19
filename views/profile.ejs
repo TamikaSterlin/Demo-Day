@@ -9,60 +9,71 @@
   <link rel="stylesheet" href="main.css">
 </head>
 
-<body class="is-preload">
-  <div class="id="page-wrapper"">
+<body id="profile" class="is-preload">
+  <div class="id=" page-wrapper"">
 
 
-  <header id="header">
-    <nav id="nav">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li>
-          <a href="#" class="icon solid fa-angle-down">Menu</a>
-          <ul>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/expensePage">Expenses</a></li>
-            <li><a href="elements.html">Live Chat</a></li>
-          </ul>
-        </li>
-        <li><a href="/logout" class="button">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div class="container">
+    <header id="header">
+      <nav id="nav">
+        <ul>
+          <li>
+            <a href="#" class="icon solid fa-angle-down">Menu</a>
+            <ul>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/expensePage">Expenses</a></li>
+              <li><a href="/findBuddy">Live Chat</a></li>
+              <li><a href="/diningPage">Dining</a></li>
+              <li><a href="/livechatPage">Rate Hospitals</a></li>
 
-    <div class="page-header text-center">
-      <h1 class="welcome"><i class="fas fa-door-open"></i></span>Welcome</h1>
-    </div>
-
-    <div class="row">
-  <section class="parent">
-    <P>PROFILE INFO</P>
-      <img src="" alt="">
-      <h3>First name: <span><%= profile.firstName %> </span>  Last name: <span><%= profile.lastName %> </span></h3>
-      <h3>City: <span><%= profile.city %> </span> State: <span><%= profile.state %> </span> </h3>
-      <h3>Currently Employed: <span><%= profile.currentEmployed %></span> </h3>
-      <h3>About Me:<span><%= profile.aboutMe %> </span> </h3>
-  </section>
-  <section class="parent">
-      <P>LAST FEW EXPENSES</P>
-      <img src="" alt="">
-      <h3>First name: <span><%= profile.firstName %> </span>  Last name: <span><%= profile.lastName %> </span></h3>
-      <h3>City: <span><%= profile.city %> </span> State: <span><%= profile.state %> </span> </h3>
-      <h3>Currently Employed: <span><%= profile.currentEmployed %></span> </h3>
-      <h3>About Me:<span><%= profile.aboutMe %> </span> </h3>
-  </section>
-    </div>
+            </ul>
+          </li>
+          <li><a href="/logout" class="button">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
 
 
+    <div class="container">
 
-    <script src="jquery.min.js"></script>
-    <script src="jquery.dropotron.min.js"></script>
-    <script src="jquery.scrollex.min.js"></script>
-    <script src="browser.min.js"></script>
-    <script src="breakpoints.min.js"></script>
-    <script src="util.js"></script>
-    <script src="main.js"></script>
+
+      <div class="profileImg">
+  <h1>Welcome <span><%= profile.firstName %> </span> </h1>
+        <form class="formTwo" action="/uploadAvi" method="POST" enctype="multipart/form-data">
+          <img src="<%= profile.img %>"  class="img-thumbnail" alt="...">
+          <p> <input class="chooseFile" type="file" name="file"></p>
+          <p> <input id="upload" type="submit" name="submit" value="upload"></p>
+        </form>
+      </div>
+
+
+      <div class="profileInfo">
+        <section class="parent">
+          <P>PROFILE INFO</P>
+          <img src="" alt="">
+          <h3> <%= profile.firstName %> <%= profile.lastName %></h3>
+          <h3> <%= profile.city %> , <%= profile.state %> </h3>
+          <h3 contenteditable ="true">Currently Employed: <%= profile.currentEmployed %></h3>
+          <h3>About Me:<p><%= profile.aboutMe %> </p></h3>
+        </section>
+        <!-- <section class="parent">
+          <P>LAST FEW EXPENSES</P>
+          <img src="" alt="">
+          <h3>First name: <span><%= profile.firstName %> </span> Last name: <span><%= profile.lastName %> </span></h3>
+          <h3>City: <span><%= profile.city %> </span> State: <span><%= profile.state %> </span> </h3>
+          <h3>Currently Employed: <span><%= profile.currentEmployed %></span> </h3>
+          <h3>About Me:<span><%= profile.aboutMe %> </span> </h3>
+        </section> -->
+      </div>
+
+
+
+      <script src="jquery.min.js"></script>
+      <script src="jquery.dropotron.min.js"></script>
+      <script src="jquery.scrollex.min.js"></script>
+      <script src="browser.min.js"></script>
+      <script src="breakpoints.min.js"></script>
+      <script src="util.js"></script>
+      <script src="main.js"></script>
 
 </body>
 

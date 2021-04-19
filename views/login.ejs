@@ -1,42 +1,47 @@
 <!doctype html>
 <html>
+
 <head>
-    <title>21 Savage Fan Site</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+  <title>21 Savage Fan Site</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 </head>
-<body>
-<div class="container">
-<div class="col-sm-6 col-sm-offset-3">
 
-    <h1><span class="fa fa-sign-in"></span> Login</h1>
+<body id="login">
+  <div class="container" id="loginForm">
+    <div class="col-sm-6 col-sm-offset-3">
 
-    <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>
+      <h1 class="loginTitle"><span class="fa fa-sign-in"></span> Login</h1>
 
-    <!-- LOGIN FORM -->
-    <form action="/login" method="post">
+      <% if (message.length > 0) { %>
+      <div class="alert alert-danger"><%= message %></div>
+      <% } %>
+
+      <!-- LOGIN FORM -->
+      <form action="/login" method="post">
         <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email">
+          <label>Email</label>
+          <input type="text" class="form-control" name="email">
         </div>
         <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password">
         </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Login</button>
-    </form>
+        <button id="loginButton" type="submit" class="btn btn-warning btn-lg">Enter</button>
+      </form>
 
-    <hr>
+      <hr>
 
-    <p>Need an account? <a href="/signup">Signup</a></p>
-    <p>Or go <a href="/">home</a>.</p>
+      <p class="linkTitle">Need an account?<a href="/signup"><span class="links">Signup</span></a></p>
+      <p class="linkTitle">Or go<a href="/"> <span class="links">home</span></a></p>
 
 
-</div>
-</div>
+    </div>
+  </div>
 </body>
+
 </html>

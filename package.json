@@ -1,0 +1,26 @@
+{
+  "name": "demo-day",
+  "version": "1.0.0",
+  "description": "WORK IN PROGRESS",
+  "main": "server.js",
+  "dependencies": {
+    "express-fileupload": "^1.2.1",
+    "node-fetch": "^2.6.1",
+    "socket.io": "^4.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TamikaSterlin/Demo-Day.git"
+  },
+  "author": "Tamika Sterlin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TamikaSterlin/Demo-Day/issues"
+  },
+  "homepage": "https://github.com/TamikaSterlin/Demo-Day#readme"
+}

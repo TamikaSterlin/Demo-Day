@@ -10,16 +10,172 @@
 /* Reset */
 
 /* Based on meyerweb.com/eric/tools/css/reset (v2.0 | 20110126 | License: public domain) */
+body {
+	  margin: min(2rem, 2vw);
+}
+
+/*css for login page*/
+
+#login {
+	background-image: url(img/background.jpeg);
+	background-size: cover;
+	background-repeat: no-repeat;
+  margin: min(2rem, 2vw)
+	font-size: 62.5;
+}
+
+#loginForm {
+	padding-bottom: 20px;
+	border: 3px solid black;
+  width: 30%;
+	border-radius: 20%;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background: rgb(150,176,198);
+	font-size: 2rem;
+}
+
+.loginTitle {
+	font-family: 'Dela Gothic One', cursive;
+	color: white;
+}
+
+.form-group label {
+	color: white;
+}
+
+#loginButton {
+	background-color: rgb(218,16,8);
+	border: none;
+}
+
+.links {
+	color:  rgb(218,16,8);
+}
+
+.linkTitle {
+	color: white;
+}
+
+/*css for login page ENDS*/
+
+/*css for sigup page begins*/
+
+#signup {
+	background-image: url(img/background.jpeg);
+	background-size: cover;
+	background-repeat: no-repeat;
+  margin: min(2rem, 2vw)
+	font-size: 62.5;
+}
+
+ #signupForm {
+	padding-bottom: 20px;
+	border: 3px solid black;
+  width: 30%;
+	border-radius: 20%;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background: rgb(150,176,198);
+	font-size: 2rem;
+}
+
+.signupTitle {
+	font-family: 'Dela Gothic One', cursive;
+	color: white;
+}
+
+.form-group label {
+	color: white;
+}
+
+#signupButton {
+	background-color: rgb(218,16,8);
+	border: none;
+}
+
+.links {
+	color:  rgb(218,16,8);
+}
+
+.linkTitle {
+	color: white;
+}
+
+/*css for signup page ends*/
+
+/*css for createProfile page*/
+
+#create {
+	background-color: rgb(150,176,198);
+	margin: min(2rem, 2vw)
+}
+
+/*css for createProfile page ENDS*/
+
+/*css for profile page*/
+#profile {
+	background-color: rgb(150,176,198);
+	margin: min(2rem, 2vw)
+	font-size: 62.5;
+}
+
+.img-thumbnail {
+	height: 250px;
+}
+.chooseFile {
+	margin: 10px auto;
+}
+
+.profileImg {
+	margin: 100px auto;
+	text-align: center;
+}
+
+.profileInfo {
+  text-align: center;
+	width: 50%;
+	margin: 0px auto;
+}
+
+#upload {
+	margin-top: 10px;
+}
+
+.parent {
+	border: 3px solid white;
+	margin: 10PX;
+	border-radius: 10%;
+}
+
+/*css for createProfile page ENDS*/
+
+/*css for expenseReport page*/
+
+#expenseReport  {
+		background-color: rgb(150,176,198);
+		margin: min(2rem, 2vw)
+		font-size: 62.5;
+}
+/*css for expenseReport page ENDS*/
 
 
+/*css for expenses page*/
 
-.expenseBox {
+#expenses {
+		background-color: rgb(150,176,198);
+		margin: min(2rem, 2vw)
+		font-size: 62.5;
+}
+
+
+ .expenseBox {
 	border: 1px solid black;
 	width: 33%;
 	display: inline-block;
 	margin: 0px auto;
 	text-align: center;
-}
+} 
 
 
 .expenseTitle {
@@ -35,6 +191,45 @@
 	border-bottom: 2px solid black;
 }
 
+.expense h3 {
+font-size: 1.5rem;
+margin-bottom: 40px;
+}
+
+.expense input {
+	margin: 5px 0px;;
+}
+
+.amount {
+	width: 100%;
+}
+
+#start {
+	width: 60%;
+}
+
+#appt {
+	width: 40%;
+}
+
+.category {
+	border: 2px solid black;
+	border-radius: 0;
+}
+
+.categorys {
+	margin: 5px 0px;
+}
+.description {
+	border: 2px solid black;
+	border-radius: 0;
+}
+
+.report h3 {
+font-size: 1.5rem;
+margin-bottom: 40px;
+}
+
 .report {
 	width: 40%;
 	text-align: center;
@@ -46,6 +241,56 @@
 .runExpense {
 	margin-top: 20px;
 }
+/*css for expensespage ENDS*/
+
+/*css for dining page*/
+
+#dining {
+		background-color: rgb(150,176,198);
+		margin: min(2rem, 2vw)
+		font-size: 62.5;
+}
+
+#zip {
+	margin: 30px auto;
+	width: 30%;
+	text-align: center;
+}
+
+.zip {
+	margin-bottom: 20px;
+}
+
+#list {
+	list-style: none;
+	margin: 0px auto;
+	text-align: center;
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.allLinks {
+	padding: 10px;
+}
+
+.result {
+	text-align: center;
+	font-size: 2rem;
+	border-bottom: 1px solid white;
+	padding-bottom: 10px;
+}
+
+.goodlink {
+	color: white;
+}
+
+.restaurantsName {
+	overflow-y: scroll;
+	height: 400px;
+}
+/*css for dining page ENDS*/
+
+
 
 
 	html, body, div, span, applet, object,
@@ -190,10 +435,7 @@
 		margin: 0 0 0.5em 0;
 	}
 
-	.parent {
-		border: 3px solid white;
-		margin: 10PX;
-	}
+
 
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {

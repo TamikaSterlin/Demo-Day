@@ -7,31 +7,30 @@
 <html>
 
 <head>
-	<title>Contact - Alpha by HTML5 UP</title>
+	<title>Travel Buddy</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="main.css" />
 </head>
 
-<body class="is-preload">
+<body id="expenses" class="is-preload">
 	<div id="page-wrapper">
 
 		<!-- Header -->
 		<header id="header">
 			<nav id="nav">
 				<ul>
-					<li><a href="/">Home</a></li>
 					<li>
 						<a href="#" class="icon solid fa-angle-down">Menu</a>
 						<ul>
 							<li><a href="/profile">Profile</a></li>
 							<li><a href="/expensePage">Expenses</a></li>
-							<li><a href="/livechatPage">Live Chat</a></li>
+							<li><a href="/findBuddy">Live Chat</a></li>
 							<li><a href="/diningPage">Dining</a></li>
-							<li><a href="/livechatPage">Ra</a></li>
+							<li><a href="/livechatPage">Rate Hospitals</a></li>
 						</ul>
 					</li>
-					<li><a href="/signup" class="button">Sign Up</a></li>
+					<li><a href="/logout" class="button">Logout</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -42,14 +41,16 @@
 				<h2>Track Expenses</h2>
 			</header>
 			<div class="box">
+
 				<form class="expense" method="post" action="/expensePage">
+						<h3>Enter Expense info below...</h3>
 					<div class="row gtr-50 gtr-uniform">
 						<% let date = new Date()
 						let month = date.getMonth() + 1
 						let day = date.getDate()
 						let year = date.getFullYear()
 						%>
-						<input type="date" id="start" name="currentDate" value="<%= year %>-<%= month %>-<%= day %>" min="<%= year %>-<%= month %>-01" max="<%= year %>-<%= month %>-31">
+						<input type="date" id="start"  name="currentDate" value="<%= year %>-<%= month %>-<%= day %>" min="<%= year %>-<%= month %>-01" max="<%= year %>-<%= month %>-31">
 						<input type="time" id="appt" name="time">
 						<select class="category" name="category">
 							<option value="Travel">Travel</option>
@@ -58,8 +59,8 @@
 							<option value="Misc">Misc</option>
 
 						</select>
-						<input type="number" min="0" value="" name="amount" placeholder="amount spent">
-						<input type="text" min="0" value="" name="description" placeholder="Description">
+						<input class="amount" type="number" step="0.01" min="0" value="" name="amount" placeholder="amount spent">
+						<input class="description" type="text" min="0" value="" name="description" placeholder="Description">
 						<div class="col-12">
 							<ul class="actions special">
 								<li><input type="submit" value="Enter"></li>
@@ -68,10 +69,11 @@
 					</div>
 				</form>
 				<section class="report">
+					<h3>or run a full expense report</h3>
 					<form class="" action="/expenseReport" method="post">
-						<input type="text" name="startDate" value="" placeholder="start date" na>
-						<input type="text" name="endDate" value="" placeholder="end date">
-					<a href="/expenseReport">	<input class="runExpense" type="submit" value="Run Expense Report"></a>
+				<p>		<span> Start Date: </span> <input class="categorys" type="date" name="startDate" value="" ></p>
+				<p>	<span> End Date: </span>	<input class="categorys"type="date" name="endDate" value="" >
+					<a href="/expenseReport">	<input class="runExpense" type="submit" value="Run Expense Report"></a>  </p>
 					</form>
 				</section>
 			</div>
@@ -79,7 +81,7 @@
 		</section>
 
 		<section id="main" class="container medium">
-			<h2>Last Few Expenses ...</h2>
+			<h2>Latest Expenses ...</h2>
 			<div class="box">
 				<%
 				let total = 0
@@ -91,7 +93,7 @@
 				<div class="expenseBox">
 				<p>Date: <span class="item"><%= expenses[i].currentDate %></span></p>
 				<p>category: <span class="item"><%= expenses[i].category %></span></p>
-				<p>Expense Amount: <span class="item"><%= expenses[i].amount %></span></p>
+				<p>Expense Amount: $<span class="item"><%= expenses[i].amount %></span></p>
 				<p>Description: <span class="item"><%= expenses[i].description %></span></p>
 				<p><span><i class="fa fa-trash" aria-hidden="true"></i></span></p>
 				</div>

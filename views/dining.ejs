@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="main.css" />
 </head>
 
-<body class="is-preload">
+<body id="dining" class="is-preload">
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -26,12 +26,12 @@
 						<ul>
 							<li><a href="/profile">Profile</a></li>
 							<li><a href="/expensePage">Expenses</a></li>
-							<li><a href="/livechatPage">Live Chat</a></li>
+							<li><a href="/findBuddy">Live Chat</a></li>
 							<li><a href="/diningPage">Dining</a></li>
 							<li><a href="/livechatPage">Rate Hospitals</a></li>
 						</ul>
 					</li>
-					<li><a href="/signup" class="button">Sign Up</a></li>
+					<li><a href="/logout" class="button">Logout</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -42,7 +42,7 @@
 				<h2>Hungry?</h2>
 				<h3>Find restaurants in your area below .. </h3>
 			</header>
-			<div class="box">
+			<div id="zip" class="box">
 
 				<form class="dining" method="post" action="/diningPage">
 					<input class="zip" type="text" min="0" value="" name="Zipcode" placeholder="Enter Zipcode">
@@ -52,20 +52,24 @@
 					</div>
 				</form>
 			</div>
+ <div class="restaurantsName">
+
 
 			<% if(restaurants) { %>
-			<p>Here's a list of restaurants near you <%= zip %> </p>
+			<p class="result">Here's a list of restaurants near you <%= zip %> </p>
 			<ul id="list">
 				<% for(let i=0; i < restaurants.length; i++) { %>
-				<li class="restaurantsName">
+				<li class="allLinks">
 					<% if(restaurants[i].restaurant_website == '') { %>
-					<%=	restaurants[i].restaurant_name %>
+					<%=	restaurants[i].restaurant_name %> |
+						<%=	restaurants[i].address.formatted %>
 					<% } else {  %>
-					<a href="<%= restaurants[i].restaurant_website %>"> <%= restaurants[i].restaurant_name %> </a> <% } %> </li>
+	<a class="goodlink"href="<%= restaurants[i].restaurant_website %>"> <%= restaurants[i].restaurant_name %> </a>
+		 | <%=	restaurants[i].address.formatted %>  <% } %> </li>
 				<% } %>
 			</ul>
 			<% } %>
-
+ </div>
 			<!-- </form> -->
 	</div>
 

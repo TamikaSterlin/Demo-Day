@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="main.css" />
 </head>
 
-<body id="expenseReport" class="is-preload">
+<body id="create" class="is-preload">
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -28,6 +28,7 @@
 							<li><a href="/findBuddy">Live Chat</a></li>
 							<li><a href="/diningPage">Dining</a></li>
 							<li><a href="/livechatPage">Rate Hospitals</a></li>
+
 						</ul>
 					</li>
 					<li><a href="/logout" class="button">Logout</a></li>
@@ -35,51 +36,28 @@
 			</nav>
 		</header>
 
-
-
-
-
+		<!-- Main -->
 		<section id="main" class="container medium">
-			<h2>Expense Report</h2>
-			<div class="listBox">
-				<table>
+			<header>
+				<h2>Find Buddy to Chat</h2>
+				<p>Conect with nurses in your area!</p>
+			</header>
+			<div id="buddyBox" class="box">
+				<ul>
+					<%  for(var i=0 ; i < profiles.length; i++) {
+						console.log(profiles[i].user, myProfile.user, profiles[i], myProfile, )
+						if(profiles[i].user != myProfile.user  ) {
+						%>
+					<a href="/livechatPage/<%= profiles[i]._id %> ">
+						<li><%= profiles[i].firstName %> <span><%= profiles[i].state %></span></li>
+					</a>
 
 
-					<tr>
-
-						<th>Date:</th>
-						<th>category: </th>
-				  	<th>Description: </th>
-					 <th>Expense Amount:</th>
-
-
-					</tr>
-
-					<%
-				let total = 0
-				if(expenses.length === 0) {%>
-					<h2>No expenses found for that period ...</h2>
-					<% }	else {
-
-				for(var i=0 ; i < expenses.length; i++) {
-					total = total + expenses[i].amount
-					%>
-
-
-					<tr>
-						<td><%= expenses[i].currentDate %></td>
-						<td ><%= expenses[i].category %></td>
-						<td><%= expenses[i].description %></td>
-						<td>$<%= expenses[i].amount %></td>
-
-						<td><i class="fa fa-trash" aria-hidden="true"></i></td>
-					</tr>
-				</table>
-
-				<% } %>
-				<p>Total = <%= total %></p>
-				<% } %>
+					<% }
+				} %>
+				</ul>
 			</div>
+
 		</section>
 
 	</div>
