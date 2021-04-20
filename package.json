@@ -4,6 +4,7 @@
   "description": "WORK IN PROGRESS",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express-fileupload": "^1.2.1",
     "node-fetch": "^2.6.1",
     "socket.io": "^4.0.1"
