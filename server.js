@@ -59,9 +59,9 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // launch ======================================================================
 io.on('connection', function(socket){
   console.log('a user connected' + socket.id);
-  socket.on('chat message', function(data){
+  socket.on('userMessage', function(data){
     console.log('message: ' + data);
-    io.emit('chat message', data);
+    io.emit('userMessage', data);
   });
 });
 

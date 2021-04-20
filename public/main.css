@@ -128,14 +128,16 @@ body {
 }
 
 .profileImg {
-	margin: 100px auto;
+	margin: 10px 100px;
 	text-align: center;
+	display: inline-block;
 }
 
 .profileInfo {
   text-align: center;
-	width: 50%;
+	width: 600px;
 	margin: 0px auto;
+	display: inline-block;
 }
 
 #upload {
@@ -146,6 +148,18 @@ body {
 	border: 3px solid white;
 	margin: 10PX;
 	border-radius: 10%;
+}
+
+.profileH1 {
+	margin-top: 100px;
+	margin-bottom: 100px;
+	text-align: center;
+}
+
+.profileParent {
+	 display: flex;
+	 align-items: top;
+	 justify-content: center;
 }
 
 /*css for createProfile page ENDS*/
@@ -175,7 +189,7 @@ body {
 	display: inline-block;
 	margin: 0px auto;
 	text-align: center;
-} 
+}
 
 
 .expenseTitle {

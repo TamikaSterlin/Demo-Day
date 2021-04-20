@@ -49,8 +49,8 @@
 
 						<th>Date:</th>
 						<th>category: </th>
-				  	<th>Description: </th>
-					 <th>Expense Amount:</th>
+						<th>Description: </th>
+						<th>Expense Amount:</th>
 
 
 					</tr>
@@ -68,17 +68,19 @@
 
 					<tr>
 						<td><%= expenses[i].currentDate %></td>
-						<td ><%= expenses[i].category %></td>
+						<td><%= expenses[i].category %></td>
 						<td><%= expenses[i].description %></td>
 						<td>$<%= expenses[i].amount %></td>
 
 						<td><i class="fa fa-trash" aria-hidden="true"></i></td>
 					</tr>
-				</table>
 
-				<% } %>
-				<p>Total = <%= total %></p>
-				<% } %>
+
+					<% } %>
+
+					<% } %>
+				</table>
+					<p>Total = <%= total %></p>
 			</div>
 		</section>
 

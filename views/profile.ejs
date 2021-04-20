@@ -35,9 +35,10 @@
 
     <div class="container">
 
-
+  <h1 class="profileH1">Welcome <span><%= profile.firstName %> </span> </h1>
+  <div class="profileParent">
       <div class="profileImg">
-  <h1>Welcome <span><%= profile.firstName %> </span> </h1>
+
         <form class="formTwo" action="/uploadAvi" method="POST" enctype="multipart/form-data">
           <img src="<%= profile.img %>"  class="img-thumbnail" alt="...">
           <p> <input class="chooseFile" type="file" name="file"></p>
@@ -48,21 +49,17 @@
 
       <div class="profileInfo">
         <section class="parent">
+
           <P>PROFILE INFO</P>
           <img src="" alt="">
           <h3> <%= profile.firstName %> <%= profile.lastName %></h3>
           <h3> <%= profile.city %> , <%= profile.state %> </h3>
           <h3 contenteditable ="true">Currently Employed: <%= profile.currentEmployed %></h3>
           <h3>About Me:<p><%= profile.aboutMe %> </p></h3>
+
         </section>
-        <!-- <section class="parent">
-          <P>LAST FEW EXPENSES</P>
-          <img src="" alt="">
-          <h3>First name: <span><%= profile.firstName %> </span> Last name: <span><%= profile.lastName %> </span></h3>
-          <h3>City: <span><%= profile.city %> </span> State: <span><%= profile.state %> </span> </h3>
-          <h3>Currently Employed: <span><%= profile.currentEmployed %></span> </h3>
-          <h3>About Me:<span><%= profile.aboutMe %> </span> </h3>
-        </section> -->
+
+          </div>
       </div>
 
 
