@@ -113,6 +113,21 @@ body {
 
 /*css for createProfile page ENDS*/
 
+/*css for findbuddy page*/
+
+.buddybox {
+	width: 30%;
+	margin: 0px auto;
+	text-align: center;
+}
+
+#listBuddy li {
+		padding: 10px 0px;
+			list-style: none;
+}
+
+/*css for findbuddy page ENDS*/
+
 /*css for profile page*/
 #profile {
 	background-color: rgb(150,176,198);
@@ -123,8 +138,13 @@ body {
 .img-thumbnail {
 	height: 250px;
 }
+
 .chooseFile {
 	margin: 10px auto;
+}
+
+.profilespan {
+	text-decoration: underline;
 }
 
 .profileImg {
@@ -304,7 +324,21 @@ margin-bottom: 40px;
 }
 /*css for dining page ENDS*/
 
+/*css for dining page*/
 
+#messages {
+	margin-top: 15px;
+}
+
+.message span {
+	padding: 5px;
+}
+
+.chatterName {
+	font-weight: bold;
+}
+
+/*css for dining page ENDS*/
 
 
 	html, body, div, span, applet, object,

@@ -43,14 +43,16 @@
 			<div class="box">
 
 				<form class="expense" method="post" action="/expensePage">
-						<h3>Enter Expense info below...</h3>
+					<h3>Enter Expense info below...</h3>
 					<div class="row gtr-50 gtr-uniform">
 						<% let date = new Date()
+				    date.setMinutes(date.getMinutes() - date.getTimezoneOffset())
+						let current = date.toJSON().slice(0,10);
 						let month = date.getMonth() + 1
 						let day = date.getDate()
 						let year = date.getFullYear()
 						%>
-						<input type="date" id="start"  name="currentDate" value="<%= year %>-<%= month %>-<%= day %>" min="<%= year %>-<%= month %>-01" max="<%= year %>-<%= month %>-31">
+						<input type="date" id="start" name="currentDate" value="<%= current %>" min="<%= year %>-<%= month %>-01" max="<%= year %>-<%= month %>-31">
 						<input type="time" id="appt" name="time">
 						<select class="category" name="category">
 							<option value="Travel">Travel</option>
@@ -71,9 +73,10 @@
 				<section class="report">
 					<h3>or run a full expense report</h3>
 					<form class="" action="/expenseReport" method="post">
-				<p>		<span> Start Date: </span> <input class="categorys" type="date" name="startDate" value="" ></p>
-				<p>	<span> End Date: </span>	<input class="categorys"type="date" name="endDate" value="" >
-					<a href="/expenseReport">	<input class="runExpense" type="submit" value="Run Expense Report"></a>  </p>
+						<p> <span> Start Date: </span> <input class="categorys" type="date" name="startDate" value="<%= current %>"></p>
+						<p> <span> End Date: </span> <input class="categorys" type="date" name="endDate" value="<%= current %>">
+							<a href="/expenseReport"> <input class="runExpense" type="submit" value="Run Expense Report"></a>
+						</p>
 					</form>
 				</section>
 			</div>
@@ -91,11 +94,11 @@
 				}
 				for(var i=expenses.length - 1; i >= stop; i--) {%>
 				<div class="expenseBox">
-				<p>Date: <span class="item"><%= expenses[i].currentDate %></span></p>
-				<p>category: <span class="item"><%= expenses[i].category %></span></p>
-				<p>Expense Amount: $<span class="item"><%= expenses[i].amount %></span></p>
-				<p>Description: <span class="item"><%= expenses[i].description %></span></p>
-				<p><span><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+					<p>Date: <span class="item"><%= expenses[i].currentDate %></span></p>
+					<p>category: <span class="item"><%= expenses[i].category %></span></p>
+					<p>Expense Amount: $<span class="item"><%= expenses[i].amount %></span></p>
+					<p>Description: <span class="item"><%= expenses[i].description %></span></p>
+					<p><span><i class="fa fa-trash" aria-hidden="true"></i></span></p>
 				</div>
 				<% } %>
 			</div>
@@ -111,7 +114,21 @@
 	<script src="breakpoints.min.js"></script>
 	<script src="util.js"></script>
 	<script src="main.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+	<script>
+		var socket = io();
+		socket.on('userMessage', function(socketMsgs) {
+			const socketMsg = JSON.parse(socketMsgs)
+			console.log('expensespage', socketMsg);
+			if (socketMsg.to === "<%= myId %>") {
+				var answer = confirm("You have a chat request from " + socketMsg.fromName + ", would you like to connect?")
+				if (answer) {
+					window.location.href = "/livechatPage/" + socketMsg.from
+						// window.location.href = "/chat?userName=<%= myId %>&chatwith=" + socketMsg.from + "&firstMsg=" + socketMsg.msg
+				}
+			}
+		});
+	</script>
 </body>
 
 </html>

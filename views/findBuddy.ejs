@@ -14,7 +14,7 @@
 </head>
 
 <body id="create" class="is-preload">
-	<div id="page-wrapper">
+	<div id="page-wrapper" class="buddybox">
 
 		<!-- Header -->
 		<header id="header">
@@ -43,13 +43,13 @@
 				<p>Conect with nurses in your area!</p>
 			</header>
 			<div id="buddyBox" class="box">
-				<ul>
+				<ul id="listBuddy">
 					<%  for(var i=0 ; i < profiles.length; i++) {
 						console.log(profiles[i].user, myProfile.user, profiles[i], myProfile, )
 						if(profiles[i].user != myProfile.user  ) {
 						%>
 					<a href="/livechatPage/<%= profiles[i]._id %> ">
-						<li><%= profiles[i].firstName %> <span><%= profiles[i].state %></span></li>
+						<li><%= profiles[i].firstName %> <%= profiles[i].lastName %><span> <%= profiles[i].state %></span></li>
 					</a>
 
 

@@ -57,11 +57,13 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // launch ======================================================================
+// io.on listening to the connection to the server
 io.on('connection', function(socket){
+  socket.join(socket.handshake.query.room)
   console.log('a user connected' + socket.id);
   socket.on('userMessage', function(data){
-    console.log('message: ' + data);
-    io.emit('userMessage', data);
+    console.log('io.on message: ' + data);
+   io.to(socket.handshake.query.room).emit('userMessage', data);
   });
 });
 

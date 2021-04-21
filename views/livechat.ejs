@@ -40,7 +40,8 @@
 		<section id="main" class="container medium">
 			<header>
 				<h2>Live Chat</h2>
-				<p>Conected with <%= otherUser %> </p>
+				<p>Conected with <%= otherUser.firstName %> <%= otherUser.lastName %></p>
+
 			</header>
 
 			<form id="formMessage" action="/nurseOneMessage" method="post" onsubmit="return false">
@@ -60,8 +61,8 @@
 							<ul id="messages">
 
 
-							<textarea id="message" placeholder="Enter your message" rows="6" name="aboutMe"></textarea>
-								</ul>
+								<textarea id="message" placeholder="Enter your message" rows="6" name="aboutMe"></textarea>
+							</ul>
 						</div>
 						<div class="col-12">
 							<ul class="actions special">
@@ -87,61 +88,66 @@
 	<script src="/chat.js"></script>
 
 
-<script type="text/javascript">
-const socket = io()
-const sendMessageButton = document.getElementById('sendMessage');
-sendMessageButton.addEventListener('click', function(e) {
-	e.preventDefault(); // prevents page reloading
-	const messageElement = document.getElementById('message');
-	const userElement = document.getElementById('user');
-	const msg = {
-		msg: messageElement.value,
-		to: "<%= otherUser %>",
-		from: "<%= myId %>",
-		fromName: userElement.value
-	}
-	console.log("Trying to send Message", msg)
-	socket.emit('userMessage', JSON.stringify(msg));
+	<script type="text/javascript">
+		const socket = io({
+			query: {
+				room: '<%= otherUser._id > myId ? otherUser._id : myId %> ' + '_' + '<%= otherUser._id <= myId ? otherUser._id : myId  %>'
+			}
+		})
+		const sendMessageButton = document.getElementById('sendMessage');
+		sendMessageButton.addEventListener('click', function(e) {
+			e.preventDefault(); // prevents page reloading
+			const messageElement = document.getElementById('message');
+			const userElement = document.getElementById('user');
+			const msg = {
+				msg: messageElement.value,
+				to: "<%= otherUser._id %>",
+				from: "<%= myId %>",
+				fromName: userElement.value
+			}
+			console.log("Trying to send Message", msg)
+			socket.emit('userMessage', JSON.stringify(msg));
 
-	messageElement.value = '';
+			messageElement.value = '';
 
-});
-socket.on('userMessage', function(socketMsgs) {
-	const socketMsg = JSON.parse(socketMsgs)
-	if (socketMsg.to === "<%= myId %>" || socketMsg.from === "<%= myId %>") {
-		const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-		const today = new Date();
-		const day = today.getDay()
-		const dd = today.getDate();
-		const mm = today.getMonth() + 1;
-		const yyyy = today.getFullYear();
-		const date = daysOfWeek[day] + " " + mm + '/' + dd + '/' + yyyy;
-		const time = today.toLocaleTimeString('en-US')
-		const name = document.getElementById('user');
-		const ul = document.getElementById('messages');
-		const li = document.createElement("LI");
-		const dateSpan = document.createElement("span");
-		const timeSpan = document.createElement("span");
-		const nameSpan = document.createElement("span")
-		const messageSpan = document.createElement("span")
-		const dateTextNode = document.createTextNode(date);
-		const timeTextNode = document.createTextNode(time);
-		const nameTextNode = document.createTextNode(socketMsg.fromName);
-		const messageTextNode = document.createTextNode(socketMsg.msg);
-		dateSpan.appendChild(dateTextNode);
-		timeSpan.appendChild(timeTextNode);
-		nameSpan.appendChild(nameTextNode)
-		messageSpan.appendChild(messageTextNode);
+		});
+		socket.on('userMessage', function(socketMsgs) {
+			const socketMsg = JSON.parse(socketMsgs)
+			if (socketMsg.to === "<%= myId %>" || socketMsg.from === "<%= myId %>") {
+				const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+				const today = new Date();
+				const day = today.getDay()
+				const dd = today.getDate();
+				const mm = today.getMonth() + 1;
+				const yyyy = today.getFullYear();
+				const date = daysOfWeek[day] + " " + mm + '/' + dd + '/' + yyyy;
+				const time = today.toLocaleTimeString('en-US')
+				const name = document.getElementById('user');
+				const ul = document.getElementById('messages');
+				const li = document.createElement("LI");
+				const dateSpan = document.createElement("span");
+				const timeSpan = document.createElement("span");
+				const nameSpan = document.createElement("span")
+				const messageSpan = document.createElement("span")
+				const dateTextNode = document.createTextNode(date);
+				const timeTextNode = document.createTextNode(time);
+				const nameTextNode = document.createTextNode(socketMsg.fromName);
+				const messageTextNode = document.createTextNode(socketMsg.msg);
+				dateSpan.appendChild(dateTextNode);
+				timeSpan.appendChild(timeTextNode);
+				nameSpan.appendChild(nameTextNode)
+				messageSpan.appendChild(messageTextNode);
 
-		li.appendChild(dateSpan);
-		li.appendChild(timeSpan);
-		li.appendChild(nameSpan);
-		li.appendChild(messageSpan);
-		ul.appendChild(li)
-		li.classList.add('message');
-	}
-});
-</script>
+				li.appendChild(dateSpan);
+				li.appendChild(timeSpan);
+				li.appendChild(nameSpan);
+				li.appendChild(messageSpan);
+				ul.appendChild(li)
+				li.classList.add('message');
+				nameSpan.classList.add('chatterName');
+			}
+		});
+	</script>
 
 </body>
 

@@ -35,31 +35,41 @@
 
     <div class="container">
 
-  <h1 class="profileH1">Welcome <span><%= profile.firstName %> </span> </h1>
-  <div class="profileParent">
-      <div class="profileImg">
+      <h1 class="profileH1">Welcome <span><%= profile.firstName %> </span> </h1>
+      <div class="profileParent">
+        <div class="profileImg">
 
-        <form class="formTwo" action="/uploadAvi" method="POST" enctype="multipart/form-data">
-          <img src="<%= profile.img %>"  class="img-thumbnail" alt="...">
-          <p> <input class="chooseFile" type="file" name="file"></p>
-          <p> <input id="upload" type="submit" name="submit" value="upload"></p>
-        </form>
-      </div>
+          <form class="formTwo" action="/uploadAvi" method="POST" enctype="multipart/form-data">
+
+            <% if(profile.img) {%>
+
+            <img src="<%= profile.img %>" class="img-thumbnail" alt="profileImg">
+            <% }	else { %>
+            <img src="img/avi.jpeg" class="img-thumbnail" alt="profileImg">
 
 
-      <div class="profileInfo">
-        <section class="parent">
+            <% } %>
 
-          <P>PROFILE INFO</P>
-          <img src="" alt="">
-          <h3> <%= profile.firstName %> <%= profile.lastName %></h3>
-          <h3> <%= profile.city %> , <%= profile.state %> </h3>
-          <h3 contenteditable ="true">Currently Employed: <%= profile.currentEmployed %></h3>
-          <h3>About Me:<p><%= profile.aboutMe %> </p></h3>
 
-        </section>
+            <p> <input class="chooseFile" type="file" name="file"></p>
+            <p> <input id="upload" type="submit" name="submit" value="upload"></p>
+          </form>
+        </div>
 
-          </div>
+
+        <div class="profileInfo">
+          <section class="parent">
+
+            <P>PROFILE INFO</P>
+            <h3> <%= profile.firstName %> <%= profile.lastName %></h3>
+            <h3> <%= profile.city %> , <%= profile.state %> </h3>
+            <h3><span class="profilespan">Currently Employed: </span> <%= profile.currentEmployed %></h3>
+            <h3><span class="profilespan">About Me: </span><p><%= profile.aboutMe %> </p>
+            </h3>
+
+          </section>
+
+        </div>
       </div>
 
 
