@@ -7,7 +7,7 @@
 <html>
 
 <head>
-	<title>Contact - Alpha by HTML5 UP</title>
+	<title>Travel Buddy</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="main.css" />
@@ -45,12 +45,12 @@
 				<table>
 
 
-					<tr>
+					<tr id="headers">
 
-						<th>Date:</th>
-						<th>category: </th>
-						<th>Description: </th>
-						<th>Expense Amount:</th>
+						<th class="th">Date:</th>
+						<th class="th">category: </th>
+						<th class="th">Description: </th>
+						<th class="th">Expense Amount:</th>
 
 
 					</tr>
@@ -80,7 +80,12 @@
 
 					<% } %>
 				</table>
-					<p>Total = <%= total %></p>
+				<div class="total">
+								<p >Total = $<%= total %></p>
+				</div>
+				<ul class="actions special">
+					<li> <a href="/expenseReport?format=CSV"> <button type="button" name="button">Download CSV</button> </li></a>
+				</ul>
 			</div>
 		</section>
 

@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
 const upload = require('express-fileupload')
+const moment = require('moment')
 
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
@@ -29,6 +30,22 @@ mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
   require('./app/routes.js')(app, passport, db);
+
+  //put socket connection in here so that database is available
+
+  io.on('connection', function(socket) {
+    socket.join(socket.handshake.query.room)
+    console.log('a user connected' + socket.id);
+    socket.on('userMessage', function(message) {
+      db.collection('messages').save({
+        ...JSON.parse(message),
+        messageDate: moment().toISOString()
+      } , (err, result) => {
+          console.log('io.on message: ' + message);
+          io.to(socket.handshake.query.room).emit('userMessage', message);
+        })
+    });
+  });
 }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -58,18 +75,10 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // launch ======================================================================
 // io.on listening to the connection to the server
-io.on('connection', function(socket){
-  socket.join(socket.handshake.query.room)
-  console.log('a user connected' + socket.id);
-  socket.on('userMessage', function(data){
-    console.log('io.on message: ' + data);
-   io.to(socket.handshake.query.room).emit('userMessage', data);
-  });
-});
 
 // app.listen(port);
 
-http.listen(port, function(){
+http.listen(port, function() {
   console.log(`listening on *${port}`);
 });
 console.log('The magic happens on port ' + port);

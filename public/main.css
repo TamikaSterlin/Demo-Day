@@ -191,6 +191,26 @@ body {
 		margin: min(2rem, 2vw)
 		font-size: 62.5;
 }
+
+.total {
+  text-align: right;
+	font-size: 2rem;
+}
+
+#headers {
+	font-size: 1.5rem;
+}
+
+.th {
+	padding-top: 25px;
+}
+
+#main h2 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+
 /*css for expenseReport page ENDS*/
 
 
@@ -328,10 +348,37 @@ margin-bottom: 40px;
 
 #messages {
 	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+}
+
+textarea {
+	margin-bottom: 10px;
+}
+
+.message  {
+	max-width: 80%;
+	margin: 5px 0px;
 }
 
 .message span {
 	padding: 5px;
+}
+
+.self {
+	background-color: rgb(150,176,198);
+	color: white;
+	border-radius: 1rem 1rem 0 1rem;
+	text-align: left;
+	align-self: flex-end;
+}
+
+.other {
+	background-color: rgb(68,68,68);
+	color: white;
+	border-radius: 1rem 1rem 1rem 0rem;
+	text-align: right;
+	align-self: flex-start;
 }
 
 .chatterName {

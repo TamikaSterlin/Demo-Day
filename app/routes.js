@@ -1,5 +1,6 @@
  var mongoose = require('mongoose')
 
+
  module.exports = function(app, passport, db) {
    const fetch = require('node-fetch')
 
@@ -53,21 +54,36 @@
        })
      });
    })
-   
+
    app.get('/expenseReport', isLoggedIn, function(req, res) {
      //find method ensures that its only showing that specific users info and sorts by current date
+     //DIFF between params and query  is that a param has to be in the get name with a slash  and the page will always go there
+     //while a query param can be there or not there and the route will still work
      db.collection('expenses').find({
        user: req.user.local.email
      }).sort({
        currentDate: 1
      }).toArray((err, result) => {
        if (err) return console.log(err)
-       res.render('expenseReport.ejs', {
-         user: req.user,
-         expenses: result
-       })
+       if (req.query.format === 'CSV') {
+         res.set("Content-Disposition", "attachment;filename=Expense%20Report.csv");
+         res.write('Date,Category,Description,Amount\r\n')
+         let total = 0
+         for (let i = 0; i < result.length; i++) {
+           total = total + result[i].amount
+           res.write(result[i].currentDate + ',' + ',' + result[i].category + ',' + result[i].description + ',' + result[i].amount + '\r\n')
+         }
+         res.write('\n,,Total,' + total + '\r\n')
+         res.end()
+       } else {
+         res.render('expenseReport.ejs', {
+           user: req.user,
+           expenses: result
+         })
+       }
      })
    });
+
 
    app.get('/findBuddy', isLoggedIn, function(req, res) {
      db.collection('profile').findOne({
@@ -231,23 +247,29 @@
 
    app.post('/diningPage', (req, res) => {
      const zip = req.body.Zipcode
-     const url = `https://api.documenu.com/v2/restaurants/zip_code/${zip}?key=d2742dcef78e36acc44f109a098f3fb3&page=1`
+
+     let url = `https://api.documenu.com/v2/restaurants/zip_code/${zip}?key=d2742dcef78e36acc44f109a098f3fb3&page=1`
+     //truthy or falsey if statement
+     if (req.body.latitude && req.body.longitude) {
+       url = `https://api.documenu.com/v2/restaurants/search/geo?lat=${req.body.latitude}&lon=${req.body.longitude}&key=d2742dcef78e36acc44f109a098f3fb3&page=1&distance=25&size=20`
+     }
      fetch(url)
        .then(res => res.json())
        .then(data => {
          console.log(data.data);
          let restaurants = data.data
-         res.render('dining.ejs', {
+         res.render('diningResults.ejs', {
            user: req.user,
            zip: zip,
            restaurants: restaurants
          })
          console.log(zip);
-       }, (err, result) => {
-         if (err) return console.log(err)
-         console.log('saved to database')
-         res.redirect('/expensePage')
        })
+     // , (err, result) => {
+     //   if (err) return console.log(err)
+     //   console.log('saved to database')
+     //   res.redirect('/expensePage')
+     // })
    })
 
    // app.post('/nurseOneMessage', (req, res) => {

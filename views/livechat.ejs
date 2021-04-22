@@ -7,13 +7,16 @@
 <html>
 
 <head>
-	<title>Contact - Alpha by HTML5 UP</title>
+	<title>Travel Buddy</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="/main.css" />
+	<script type="text/javascript" src="/chat.js"></script>
+
 </head>
 
 <body id="create" class="is-preload">
+
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -51,6 +54,7 @@
 
 						<div class="col-12">
 							<div id="chat-body">
+
 								<div id="output">
 
 								</div>
@@ -58,11 +62,13 @@
 							<input id="user" value="<%= fullName %>" disabled rows="6" name="user">
 						</div>
 						<div class="col-12">
+							<div id="chatMessages" style="display: none;">
+								<%= JSON.stringify(messages) %>
+							</div>
 							<ul id="messages">
 
-
-								<textarea id="message" placeholder="Enter your message" rows="6" name="aboutMe"></textarea>
 							</ul>
+							<textarea id="message" placeholder="Enter your message" rows="6" name="aboutMe"></textarea>
 						</div>
 						<div class="col-12">
 							<ul class="actions special">
@@ -85,7 +91,7 @@
 	<script src="/util.js"></script>
 	<script src="/main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-	<script src="/chat.js"></script>
+
 
 
 	<script type="text/javascript">
@@ -95,6 +101,10 @@
 			}
 		})
 		const sendMessageButton = document.getElementById('sendMessage');
+		const chatMessages = JSON.parse(document.querySelector('#chatMessages').innerText)
+		for (let i = 0; i < chatMessages.length; i++) {
+			showMessage(chatMessages[i], '<%= myId %>')
+		}
 		sendMessageButton.addEventListener('click', function(e) {
 			e.preventDefault(); // prevents page reloading
 			const messageElement = document.getElementById('message');
@@ -114,37 +124,46 @@
 		socket.on('userMessage', function(socketMsgs) {
 			const socketMsg = JSON.parse(socketMsgs)
 			if (socketMsg.to === "<%= myId %>" || socketMsg.from === "<%= myId %>") {
-				const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-				const today = new Date();
-				const day = today.getDay()
-				const dd = today.getDate();
-				const mm = today.getMonth() + 1;
-				const yyyy = today.getFullYear();
-				const date = daysOfWeek[day] + " " + mm + '/' + dd + '/' + yyyy;
-				const time = today.toLocaleTimeString('en-US')
-				const name = document.getElementById('user');
-				const ul = document.getElementById('messages');
-				const li = document.createElement("LI");
-				const dateSpan = document.createElement("span");
-				const timeSpan = document.createElement("span");
-				const nameSpan = document.createElement("span")
-				const messageSpan = document.createElement("span")
-				const dateTextNode = document.createTextNode(date);
-				const timeTextNode = document.createTextNode(time);
-				const nameTextNode = document.createTextNode(socketMsg.fromName);
-				const messageTextNode = document.createTextNode(socketMsg.msg);
-				dateSpan.appendChild(dateTextNode);
-				timeSpan.appendChild(timeTextNode);
-				nameSpan.appendChild(nameTextNode)
-				messageSpan.appendChild(messageTextNode);
+				showMessage(socketMsg)
 
-				li.appendChild(dateSpan);
-				li.appendChild(timeSpan);
-				li.appendChild(nameSpan);
-				li.appendChild(messageSpan);
-				ul.appendChild(li)
-				li.classList.add('message');
-				nameSpan.classList.add('chatterName');
+				// const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+				// const today = new Date();
+				// const day = today.getDay()
+				// const dd = today.getDate();
+				// const mm = today.getMonth() + 1;
+				// const yyyy = today.getFullYear();
+				// const date = daysOfWeek[day] + " " + mm + '/' + dd + '/' + yyyy;
+				// const time = today.toLocaleTimeString('en-US')
+				// const name = document.getElementById('user');
+				// const ul = document.getElementById('messages');
+				// const li = document.createElement("LI");
+				// const dateSpan = document.createElement("span");
+				// const timeSpan = document.createElement("span");
+				// const nameSpan = document.createElement("span")
+				// const messageSpan = document.createElement("span")
+				// const dateTextNode = document.createTextNode(date);
+				// const timeTextNode = document.createTextNode(time);
+				// const nameTextNode = document.createTextNode(socketMsg.fromName);
+				// const messageTextNode = document.createTextNode(socketMsg.msg);
+				// dateSpan.appendChild(dateTextNode);
+				// timeSpan.appendChild(timeTextNode);
+				// nameSpan.appendChild(nameTextNode)
+				// messageSpan.appendChild(messageTextNode);
+				//
+				// let author = ''
+				// if (socketMsg.to === "<%= myId %>"){
+				// 	author = 'other'
+				// } else {
+				// 	author = 'self'
+				// }
+				//
+				// li.appendChild(dateSpan);
+				// li.appendChild(timeSpan);
+				// li.appendChild(nameSpan);
+				// li.appendChild(messageSpan);
+				// ul.appendChild(li)
+				// li.classList.add('message', author);
+				// nameSpan.classList.add('chatterName');
 			}
 		});
 	</script>

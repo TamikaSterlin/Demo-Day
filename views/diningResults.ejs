@@ -44,17 +44,29 @@
 			</header>
 			<div id="zip" class="box">
 
-				<form id="diningLocationForm" class="dining hidden" method="post" action="/diningPage">
-					<input class="zip" type="text" min="0" value="" name="Zipcode" placeholder="Enter Zipcode">
-					<input id="latitude" type="hidden" name="latitude" value="">
-					<input id="longitude" type="hidden" name="longitude" value="">
-					<div class="col-12">
 
-						<input class="food" type="submit" value="Find Locations">
-					</div>
-				</form>
 			</div>
+			<div class="restaurantsName">
 
+
+				<% if(restaurants) { %>
+				<p class="result">Here's a list of restaurants near you <%= zip %> </p>
+				<ul id="list">
+					<% for(let i=0; i < restaurants.length; i++) { %>
+					<li class="allLinks">
+						<% if(restaurants[i].restaurant_website == '') { %>
+						<%=	restaurants[i].restaurant_name %> |
+						<%=	restaurants[i].address.formatted %>
+						<% } else {  %>
+						<a class="goodlink" href="<%= restaurants[i].restaurant_website %>"> <%= restaurants[i].restaurant_name %> </a>
+						| <%=	restaurants[i].address.formatted %> <% } %>
+					</li>
+					<% } %>
+				</ul>
+				<% } %>
+			</div>
+			<!-- </form> -->
+	</div>
 
 	</section>
 
@@ -79,7 +91,6 @@
 
 	<!-- Scripts -->
 	<script type="text/javascript">
-
 		function success(position) {
 
 		let diningLocationForm =	document.getElementById("diningLocationForm")
@@ -94,12 +105,12 @@
 		}
 
 		function error(err) {
-			console.log('location failed', err);
+			console.log(err);
 		}
 
 
 
-     navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {console.log(permissionStatus);})
+
 		navigator.geolocation.getCurrentPosition(success, error)
 	</script>
 	<script src="jquery.min.js"></script>
