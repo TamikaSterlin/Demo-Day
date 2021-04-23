@@ -1,15 +1,9 @@
-/*
-	Alpha by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
 var trash = document.getElementsByClassName("fa-trash");
 
 Array.from(trash).forEach(function(element) {
   console.log(element);
    console.log(element.parentNode.parentNode.parentNode.childNodes[9].innerHTML.split('').slice(1).join(''));
-  let expense_id = element.parentNode.parentNode.childNodes[9].innerHTML.split('').slice(1).join('')
+  let expense_id2 = element.parentNode.parentNode.parentNode.childNodes[9].innerHTML.split('').slice(1).join('')
 
   element.addEventListener('click', function() {
     fetch('deleteExpense', {
@@ -18,13 +12,14 @@ Array.from(trash).forEach(function(element) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        expense_id
+        expense_id2
       })
     }).then(function(response) {
       window.location.reload()
     })
   });
 });
+
 
 (function($) {
 

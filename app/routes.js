@@ -272,72 +272,29 @@
      // })
    })
 
-   // app.post('/nurseOneMessage', (req, res) => {
-   //    db.collection('messages').save({
-   //      from: req.body.clientId,
-   //      to: req.body.therapistId,
-   //      dateTime: today,
-   //      date: date,
-   //      time: time,
-   //      message: req.body.message
-   //    }, (err, result) => {
-   //      if (err) return console.log(err)
-   //      console.log('clientMessage saved to database', req.body.clientId, req.body.therapistId, req.body.message )
-   //      res.redirect('/clientprofile')
-   //    })
-   //  })
-
-
-
-   app.put('/messages', (req, res) => {
-     db.collection('messages')
-       .findOneAndUpdate({
-         name: req.body.name,
-         msg: req.body.msg
-       }, {
-         $set: {
-           thumbUp: req.body.thumbUp + 1
-         }
-       }, {
-         sort: {
-           _id: -1
-         },
-         upsert: true
-       }, (err, result) => {
-         if (err) return res.send(err)
-         res.send(result)
-       })
-   })
-
-   app.put('/messages/thumbDown', (req, res) => {
-     db.collection('messages')
-       .findOneAndUpdate({
-         name: req.body.name,
-         msg: req.body.msg
-       }, {
-         $set: {
-           thumbUp: req.body.thumbUp - 1
-         }
-       }, {
-         sort: {
-           _id: -1
-         },
-         upsert: true
-       }, (err, result) => {
-         if (err) return res.send(err)
-         res.send(result)
-       })
-   })
 
    app.delete('/deleteExpense', (req, res) => {
      db.collection('expenses').findOneAndDelete({
-       user: req.user.local.email
+       user: req.user.local.email,
+       _id: mongoose.Types.ObjectId(req.body.expense_id),
+       _id: mongoose.Types.ObjectId(req.body.expense_id2)
      }, (err, result) => {
        console.log(result);
        if (err) return res.send(500, err)
        res.send('Message deleted!')
      })
    })
+
+   // app.delete('/deleteExpenseTwo', (req, res) => {
+   //   db.collection('expenses').findOneAndDelete({
+   //     user: req.user.local.email,
+   //     _id: mongoose.Types.ObjectId(req.body.expense_id2)
+   //   }, (err, result) => {
+   //     console.log(result);
+   //     if (err) return res.send(500, err)
+   //     res.send('Message deleted!')
+   //   })
+   // })
 
    // =============================================================================
    // AUTHENTICATE (FIRST LOGIN) ==================================================

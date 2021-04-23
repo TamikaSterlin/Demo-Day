@@ -40,7 +40,7 @@
 		<section id="main" class="container medium">
 			<header>
 				<h2>Find Buddy to Chat</h2>
-				<p>Conect with nurses in your area!</p>
+				<p>Connect with nurses in your state!</p>
 			</header>
 			<div id="buddyBox" class="box">
 				<ul id="listBuddy">
@@ -48,9 +48,9 @@
 						console.log(profiles[i].user, myProfile.user, profiles[i], myProfile, )
 						if(profiles[i].user != myProfile.user  ) {
 						%>
-					<a href="/livechatPage/<%= profiles[i]._id %> ">
-						<li><%= profiles[i].firstName %> <%= profiles[i].lastName %><span> <%= profiles[i].state %></span></li>
-					</a>
+
+						<li><a href="/livechatPage/<%= profiles[i]._id %> "><%= profiles[i].firstName %> <%= profiles[i].lastName %></a> <span><%= profiles[i].state %></span> </li>
+
 
 
 					<% }

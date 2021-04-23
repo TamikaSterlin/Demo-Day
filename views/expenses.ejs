@@ -98,6 +98,7 @@
 					<p>category: <span class="item"><%= expenses[i].category %></span></p>
 					<p>Expense Amount: $<span class="item"><%= expenses[i].amount %></span></p>
 					<p>Description: <span class="item"><%= expenses[i].description %></span></p>
+					<p style="display: none" class="item"> <%= expenses[i]._id %></p>
 					<p><span><i class="fa fa-trash" aria-hidden="true"></i></span></p>
 				</div>
 				<% } %>
@@ -113,7 +114,7 @@
 	<script src="browser.min.js"></script>
 	<script src="breakpoints.min.js"></script>
 	<script src="util.js"></script>
-	<script src="main.js"></script>
+	<script src="main2.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 	<script>
 		var socket = io();
