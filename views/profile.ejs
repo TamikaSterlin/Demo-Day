@@ -23,8 +23,6 @@
               <li><a href="/expensePage">Expenses</a></li>
               <li><a href="/findBuddy">Live Chat</a></li>
               <li><a href="/diningPage">Dining</a></li>
-              <li><a href="/livechatPage">Rate Hospitals</a></li>
-
             </ul>
           </li>
           <li><a href="/logout" class="button">Logout</a></li>
@@ -61,11 +59,10 @@
           <section class="parent">
 
             <P>PROFILE INFO</P>
-            <h3> <%= profile.firstName %> <%= profile.lastName %></h3>
+            <h3 class="profileName"> <%= profile.firstName %> <%= profile.lastName %></h3>
             <h3> <%= profile.city %> , <%= profile.state %> </h3>
-            <h3><span class="profilespan">Currently Employed: </span> <%= profile.currentEmployed %></h3>
-            <h3><span class="profilespan">About Me: </span><p><%= profile.aboutMe %> </p>
-            </h3>
+            <h3> <%= profile.currentEmployed %></h3>
+            <h3><p><%= profile.aboutMe %> </p></h3>
 
           </section>
 
@@ -73,7 +70,7 @@
       </div>
 
 
-    
+
       <script src="jquery.min.js"></script>
       <script src="jquery.dropotron.min.js"></script>
       <script src="jquery.scrollex.min.js"></script>

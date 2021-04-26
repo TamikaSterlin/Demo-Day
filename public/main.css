@@ -168,6 +168,17 @@ body {
 	border: 3px solid white;
 	margin: 10PX;
 	border-radius: 10%;
+	text-align: left;
+	padding-left: 15px;
+	padding-top: 10px;
+}
+
+.parent h3 {
+	margin: 0px;
+}
+
+.profileName {
+	font-size: 3rem;
 }
 
 .profileH1 {

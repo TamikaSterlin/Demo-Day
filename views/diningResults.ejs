@@ -20,7 +20,6 @@
 		<header id="header">
 			<nav id="nav">
 				<ul>
-					<li><a href="/">Home</a></li>
 					<li>
 						<a href="#" class="icon solid fa-angle-down">Menu</a>
 						<ul>
@@ -28,7 +27,6 @@
 							<li><a href="/expensePage">Expenses</a></li>
 							<li><a href="/findBuddy">Live Chat</a></li>
 							<li><a href="/diningPage">Dining</a></li>
-							<li><a href="/livechatPage">Rate Hospitals</a></li>
 						</ul>
 					</li>
 					<li><a href="/logout" class="button">Logout</a></li>
@@ -47,17 +45,22 @@
 
 			</div>
 			<div class="restaurantsName">
-
-
-				<% if(restaurants) { %>
+				<%
+				 if(restaurants) { %>
 				<p class="result">Here's a list of restaurants near you <%= zip %> </p>
 				<ul id="list">
-					<% for(let i=0; i < restaurants.length; i++) { %>
+					<% 	for(let i=0; i < restaurants.length; i++)
+
+					{ %>
 					<li class="allLinks">
-						<% if(restaurants[i].restaurant_website == '') { %>
+						<% console.log(restaurants[i].restaurant_website )
+						 if(restaurants[i].restaurant_website == '' || restaurants[i].restaurant_website.startsWith('http:') )
+
+						 { %>
 						<%=	restaurants[i].restaurant_name %> |
 						<%=	restaurants[i].address.formatted %>
 						<% } else {  %>
+
 						<a class="goodlink" href="<%= restaurants[i].restaurant_website %>"> <%= restaurants[i].restaurant_name %> </a>
 						| <%=	restaurants[i].address.formatted %> <% } %>
 					</li>
@@ -65,27 +68,18 @@
 				</ul>
 				<% } %>
 			</div>
-			<!-- </form> -->
+			<!-- <form class="dining hidden" method="post" action="/diningPage">
+				<input class="zip" type="text" min="0" value="" name="Zipcode" placeholder="Enter Zipcode">
+				<input id="latitude" type="hidden" name="latitude" value="">
+				<input id="longitude" type="hidden" name="longitude" value="">
+				<div class="col-12">
+
+					<input class="food" type="submit" value="Find Locations">
+				</div>
+			</form> -->
 	</div>
 
 	</section>
-
-
-
-	<!-- Footer -->
-	<!-- <footer id="footer">
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</footer> -->
 
 	</div>
 
@@ -93,12 +87,12 @@
 	<script type="text/javascript">
 		function success(position) {
 
-		let diningLocationForm =	document.getElementById("diningLocationForm")
-		let longitude = document.getElementById('longitude')
-		let latitude = document.getElementById('latitude')
-		longitude.value = position.coords.longitude
-		latitude.value = position.coords.latitude
-		diningLocationForm.submit()
+			let diningLocationForm = document.getElementById("diningLocationForm")
+			let longitude = document.getElementById('longitude')
+			let latitude = document.getElementById('latitude')
+			longitude.value = position.coords.longitude
+			latitude.value = position.coords.latitude
+			diningLocationForm.submit()
 
 
 			console.log(position);

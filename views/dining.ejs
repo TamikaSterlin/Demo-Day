@@ -28,7 +28,6 @@
 							<li><a href="/expensePage">Expenses</a></li>
 							<li><a href="/findBuddy">Live Chat</a></li>
 							<li><a href="/diningPage">Dining</a></li>
-							<li><a href="/livechatPage">Rate Hospitals</a></li>
 						</ul>
 					</li>
 					<li><a href="/logout" class="button">Logout</a></li>
@@ -41,6 +40,7 @@
 			<header>
 				<h2>Hungry?</h2>
 				<h3>Find restaurants in your area below .. </h3>
+
 			</header>
 			<div id="zip" class="box">
 
@@ -81,10 +81,17 @@
 			console.log('location failed', err);
 		}
 
+		if('geolocation' in navigator) {
+	  /* geolocation is available */
+			navigator.geolocation.getCurrentPosition(success, error)
+	} else {
+	  /* geolocation IS NOT available */
+		error('geolocation failed')
+	}
 
 
-     navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {console.log(permissionStatus);})
-		navigator.geolocation.getCurrentPosition(success, error)
+    // navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {console.log(permissionStatus);})
+
 	</script>
 	<script src="jquery.min.js"></script>
 	<script src="jquery.dropotron.min.js"></script>

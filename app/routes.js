@@ -73,7 +73,7 @@
            total = total + result[i].amount
            res.write(result[i].currentDate + ',' + ',' + result[i].category + ',' + result[i].description + ',' + result[i].amount + '\r\n')
          }
-         res.write('\n,,Total,' + total + '\r\n')
+         res.write('\n,,,Total,' + total + '\r\n')
          res.end()
        } else {
          res.render('expenseReport.ejs', {

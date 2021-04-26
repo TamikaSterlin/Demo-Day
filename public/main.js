@@ -7,8 +7,8 @@
 var trash = document.getElementsByClassName("fa-trash");
 
 Array.from(trash).forEach(function(element) {
-  console.log(element);
-   console.log(element.parentNode.parentNode.parentNode.childNodes[9].innerHTML.split('').slice(1).join(''));
+  // console.log(element);
+  //  console.log(element.parentNode.parentNode.parentNode.childNodes[9].innerHTML.split('').slice(1).join(''));
   let expense_id = element.parentNode.parentNode.childNodes[9].innerHTML.split('').slice(1).join('')
 
   element.addEventListener('click', function() {
