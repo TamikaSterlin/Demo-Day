@@ -41,7 +41,15 @@
 				<h3>Find restaurants in your area below .. </h3>
 			</header>
 			<div id="zip" class="box">
+				<form class="dining hidden" method="post" action="/diningPage">
+					<input class="zip" type="text" min="0" value="" name="Zipcode" placeholder="Enter Zipcode">
+					<input id="latitude" type="hidden" name="latitude" value="">
+					<input id="longitude" type="hidden" name="longitude" value="">
+					<div class="col-12">
 
+						<input class="food" type="submit" value="Find Locations">
+					</div>
+				</form>
 
 			</div>
 			<div class="restaurantsName">
@@ -68,15 +76,7 @@
 				</ul>
 				<% } %>
 			</div>
-			<!-- <form class="dining hidden" method="post" action="/diningPage">
-				<input class="zip" type="text" min="0" value="" name="Zipcode" placeholder="Enter Zipcode">
-				<input id="latitude" type="hidden" name="latitude" value="">
-				<input id="longitude" type="hidden" name="longitude" value="">
-				<div class="col-12">
 
-					<input class="food" type="submit" value="Find Locations">
-				</div>
-			</form> -->
 	</div>
 
 	</section>

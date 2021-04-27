@@ -93,10 +93,10 @@
 				}
 				for(var i=expenses.length - 1; i >= stop; i--) {%>
 				<div class="expenseBox">
-					<p>Date: <span class="item"><%= expenses[i].currentDate %></span></p>
-					<p>category: <span class="item"><%= expenses[i].category %></span></p>
-					<p>Expense Amount: $<span class="item"><%= expenses[i].amount %></span></p>
-					<p>Description: <span class="item"><%= expenses[i].description %></span></p>
+					<p><span class="last">Date:</span> <span class="item"><%= expenses[i].currentDate %></span></p>
+					<p><span class="last">Category:</span> <span class="item"><%= expenses[i].category %></span></p>
+					<p><span class="last">Expense Amount:</span> $<span class="item"><%= expenses[i].amount %></span></p>
+					<p><span class="last">Description:</span> <span class="item"><%= expenses[i].description %></span></p>
 					<p style="display: none" class="item"> <%= expenses[i]._id %></p>
 					<p><span><i class="fa fa-trash" aria-hidden="true"></i></span></p>
 				</div>

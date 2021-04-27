@@ -81,16 +81,10 @@
 			console.log('location failed', err);
 		}
 
-		if('geolocation' in navigator) {
-	  /* geolocation is available */
-			navigator.geolocation.getCurrentPosition(success, error)
-	} else {
-	  /* geolocation IS NOT available */
-		error('geolocation failed')
-	}
 
 
-    // navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {console.log(permissionStatus);})
+navigator.geolocation.getCurrentPosition(success, error)
+navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {console.log(permissionStatus);})
 
 	</script>
 	<script src="jquery.min.js"></script>

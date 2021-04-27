@@ -71,9 +71,9 @@
          let total = 0
          for (let i = 0; i < result.length; i++) {
            total = total + result[i].amount
-           res.write(result[i].currentDate + ',' + ',' + result[i].category + ',' + result[i].description + ',' + result[i].amount + '\r\n')
+           res.write(result[i].currentDate + ',' + result[i].category + ',' + result[i].description + ',' + result[i].amount + '\r\n')
          }
-         res.write('\n,,,Total,' + total + '\r\n')
+         res.write('\n,,Total,' + total + '\r\n')
          res.end()
        } else {
          res.render('expenseReport.ejs', {
