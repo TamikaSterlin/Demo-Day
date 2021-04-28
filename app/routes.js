@@ -27,11 +27,8 @@
 
    //WHAT IF THE USER ALRRADY HAS A PROFILE??
    app.get('/create', isLoggedIn, function(req, res) {
-     // db.collection('messages').find().toArray((err, result) => {
-     //   if (err) return console.log(err)
      res.render('createProfile.ejs', {
        user: req.user.local.email,
-       // messages: result
      })
    });
 

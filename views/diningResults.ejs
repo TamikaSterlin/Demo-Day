@@ -26,7 +26,7 @@
 							<li><a href="/profile">Profile</a></li>
 							<li><a href="/expensePage">Expenses</a></li>
 							<li><a href="/findBuddy">Live Chat</a></li>
-							<li><a href="/diningPage">Dining</a></li>
+							<li><a href="/diningPage">Dining Locator</a></li>
 						</ul>
 					</li>
 					<li><a href="/logout" class="button">Logout</a></li>
@@ -84,29 +84,7 @@
 	</div>
 
 	<!-- Scripts -->
-	<script type="text/javascript">
-		function success(position) {
 
-			let diningLocationForm = document.getElementById("diningLocationForm")
-			let longitude = document.getElementById('longitude')
-			let latitude = document.getElementById('latitude')
-			longitude.value = position.coords.longitude
-			latitude.value = position.coords.latitude
-			diningLocationForm.submit()
-
-
-			console.log(position);
-		}
-
-		function error(err) {
-			console.log(err);
-		}
-
-
-
-
-		navigator.geolocation.getCurrentPosition(success, error)
-	</script>
 	<script src="jquery.min.js"></script>
 	<script src="jquery.dropotron.min.js"></script>
 	<script src="jquery.scrollex.min.js"></script>
@@ -114,7 +92,6 @@
 	<script src="breakpoints.min.js"></script>
 	<script src="util.js"></script>
 	<script src="main.js"></script>
-	<script src="mainDining.js"></script>
 
 </body>
 

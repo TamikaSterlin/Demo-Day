@@ -27,7 +27,7 @@
 							<li><a href="/profile">Profile</a></li>
 							<li><a href="/expensePage">Expenses</a></li>
 							<li><a href="/findBuddy">Live Chat</a></li>
-							<li><a href="/diningPage">Dining</a></li>
+							<li><a href="/diningPage">Dining Locator</a></li>
 						</ul>
 					</li>
 					<li><a href="/logout" class="button">Logout</a></li>
@@ -43,6 +43,7 @@
 
 			</header>
 			<div id="zip" class="box">
+				<h2 id="loading"></h2>
 
 				<form id="diningLocationForm" class="dining hidden" method="post" action="/diningPage">
 					<input class="zip" type="text" min="0" value="" name="Zipcode" placeholder="Enter Zipcode">
@@ -65,7 +66,8 @@
 	<script type="text/javascript">
 
 		function success(position) {
-
+     // document.getElementById('loading').innerHTML = 'Searching for restaurants near you ... '
+    console.log('position is', position);
 		let diningLocationForm =	document.getElementById("diningLocationForm")
 		let longitude = document.getElementById('longitude')
 		let latitude = document.getElementById('latitude')
@@ -77,13 +79,13 @@
 			console.log(position);
 		}
 
-		function error(err) {
+		function navError(err) {
 			console.log('location failed', err);
 		}
 
 
 
-navigator.geolocation.getCurrentPosition(success, error)
+navigator.geolocation.getCurrentPosition(success, navError)
 navigator.permissions.query({ name: 'geolocation' }).then(function(permissionStatus) {console.log(permissionStatus);})
 
 	</script>
@@ -94,7 +96,6 @@ navigator.permissions.query({ name: 'geolocation' }).then(function(permissionSta
 	<script src="breakpoints.min.js"></script>
 	<script src="util.js"></script>
 	<script src="main.js"></script>
-	<script src="mainDining.js"></script>
 
 </body>
 
