@@ -111,10 +111,15 @@
        }, (err, otherUserProfileResult) => {
          db.collection('messages').find().toArray((err, result) => {
            if (err) return console.log(err)
+           console.log('before', result);
+           const myMesssages = result.filter(m => (m.to == userProfileResult._id.toString() && m.from == req.params.profile_id) // message from me and to the other user
+             || // OR
+             (m.from == userProfileResult._id.toString() && m.to == req.params.profile_id))
+             console.log('after', myMesssages, req.params.profile_id, req.user._id.toString() );
            res.render('livechat.ejs', {
              fullName: userProfileResult.firstName + ' ' + userProfileResult.lastName,
              user: req.user.local.email,
-             messages: result,
+             messages: myMesssages,
              otherUser: otherUserProfileResult,
              myId: userProfileResult._id,
              profiles: result
@@ -132,15 +137,7 @@
      })
    });
 
-   app.get('/jobPage', isLoggedIn, function(req, res) {
-     db.collection('messages').find().toArray((err, result) => {
-       if (err) return console.log(err)
-       res.render('jobs.ejs', {
-         user: req.user.local.email,
-         messages: result
-       })
-     })
-   });
+
 
    // LOGOUT ==============================
    app.get('/logout', function(req, res) {
@@ -262,11 +259,6 @@
          })
          console.log(zip);
        })
-     // , (err, result) => {
-     //   if (err) return console.log(err)
-     //   console.log('saved to database')
-     //   res.redirect('/expensePage')
-     // })
    })
 
 
@@ -281,17 +273,6 @@
        res.send('Message deleted!')
      })
    })
-
-   // app.delete('/deleteExpenseTwo', (req, res) => {
-   //   db.collection('expenses').findOneAndDelete({
-   //     user: req.user.local.email,
-   //     _id: mongoose.Types.ObjectId(req.body.expense_id2)
-   //   }, (err, result) => {
-   //     console.log(result);
-   //     if (err) return res.send(500, err)
-   //     res.send('Message deleted!')
-   //   })
-   // })
 
    // =============================================================================
    // AUTHENTICATE (FIRST LOGIN) ==================================================

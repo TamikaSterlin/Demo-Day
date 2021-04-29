@@ -32,6 +32,7 @@ if (message.to === currentUser){
 } else {
   author = 'self'
 }
+console.log(currentUser, author, message.to);
 
 li.appendChild(dateSpan);
 li.appendChild(timeSpan);

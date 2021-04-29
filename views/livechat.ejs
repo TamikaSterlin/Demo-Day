@@ -102,6 +102,7 @@
 		const sendMessageButton = document.getElementById('sendMessage');
 		const chatMessages = JSON.parse(document.querySelector('#chatMessages').innerText)
 		for (let i = 0; i < chatMessages.length; i++) {
+			//getting saved messages from db
 			showMessage(chatMessages[i], '<%= myId %>')
 		}
 		sendMessageButton.addEventListener('click', function(e) {
@@ -123,46 +124,8 @@
 		socket.on('userMessage', function(socketMsgs) {
 			const socketMsg = JSON.parse(socketMsgs)
 			if (socketMsg.to === "<%= myId %>" || socketMsg.from === "<%= myId %>") {
-				showMessage(socketMsg)
-
-				// const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-				// const today = new Date();
-				// const day = today.getDay()
-				// const dd = today.getDate();
-				// const mm = today.getMonth() + 1;
-				// const yyyy = today.getFullYear();
-				// const date = daysOfWeek[day] + " " + mm + '/' + dd + '/' + yyyy;
-				// const time = today.toLocaleTimeString('en-US')
-				// const name = document.getElementById('user');
-				// const ul = document.getElementById('messages');
-				// const li = document.createElement("LI");
-				// const dateSpan = document.createElement("span");
-				// const timeSpan = document.createElement("span");
-				// const nameSpan = document.createElement("span")
-				// const messageSpan = document.createElement("span")
-				// const dateTextNode = document.createTextNode(date);
-				// const timeTextNode = document.createTextNode(time);
-				// const nameTextNode = document.createTextNode(socketMsg.fromName);
-				// const messageTextNode = document.createTextNode(socketMsg.msg);
-				// dateSpan.appendChild(dateTextNode);
-				// timeSpan.appendChild(timeTextNode);
-				// nameSpan.appendChild(nameTextNode)
-				// messageSpan.appendChild(messageTextNode);
-				//
-				// let author = ''
-				// if (socketMsg.to === "<%= myId %>"){
-				// 	author = 'other'
-				// } else {
-				// 	author = 'self'
-				// }
-				//
-				// li.appendChild(dateSpan);
-				// li.appendChild(timeSpan);
-				// li.appendChild(nameSpan);
-				// li.appendChild(messageSpan);
-				// ul.appendChild(li)
-				// li.classList.add('message', author);
-				// nameSpan.classList.add('chatterName');
+				//getting the live messages
+				showMessage(socketMsg, '<%= myId %>')
 			}
 		});
 	</script>

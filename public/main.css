@@ -129,6 +129,7 @@ body {
 /*css for findbuddy page ENDS*/
 
 /*css for profile page*/
+
 #profile {
 	background-color: rgb(150,176,198);
 	margin: min(2rem, 2vw)
@@ -137,6 +138,7 @@ body {
 
 .img-thumbnail {
 	height: 250px;
+	border-radius: 5%;
 }
 
 .chooseFile {
@@ -167,10 +169,9 @@ body {
 .parent {
 	border: 3px solid white;
 	margin: 10PX;
-	border-radius: 10%;
+	border-radius: 5%;
 	text-align: left;
-	padding-left: 15px;
-	padding-top: 10px;
+  padding: 20px 20px;
 }
 
 .parent h3 {
@@ -182,8 +183,9 @@ body {
 }
 
 .profileH1 {
+	padding-top: 20px;
 	margin-top: 100px;
-	margin-bottom: 100px;
+	margin-bottom: 30px;
 	text-align: center;
 }
 
@@ -2653,6 +2655,10 @@ textarea {
 		margin: 0 0 2em 0;
 		padding: 1em;
 	}
+
+	/* .profileBox {
+		padding-top: 5px;
+	} */
 
 	.listBox {
 		background: #fff;
